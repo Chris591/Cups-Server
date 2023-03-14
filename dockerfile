@@ -1,13 +1,4 @@
-#FROM debian:stable-slim
-FROM ubuntu:zesty
-
-# Add repos
-RUN echo 'deb http://us.archive.ubuntu.com/ubuntu/ zesty multiverse' >> /etc/apt/sources.list.d/multiverse.list && \
-	echo 'deb-src http://us.archive.ubuntu.com/ubuntu/ zesty multiverse' >> /etc/apt/sources.list.d/multiverse.list && \
-	echo 'deb http://us.archive.ubuntu.com/ubuntu/ zesty-updates multiverse' >> /etc/apt/sources.list.d/multiverse.list && \
-	echo 'deb-src http://us.archive.ubuntu.com/ubuntu/ zesty-updates multiverse' >> /etc/apt/sources.list.d/multiverse.list && \
-	echo 'deb http://archive.ubuntu.com/ubuntu/ zesty-security multiverse' >> /etc/apt/sources.list.d/multiverse.list && \
-	echo 'deb-src http://archive.ubuntu.com/ubuntu/ zesty-security multiverse' >> /etc/apt/sources.list.d/multiverse.list
+FROM debian:stable-slim
 
 RUN apt-get update && apt-get install -y \
 #  curl \
@@ -19,9 +10,8 @@ RUN apt-get update && apt-get install -y \
   cups-pdf \
   printer-driver-all \
 	inotify-tools \
-	python-cups
-
-RUN rm -rf /var/lib/apt/lists/*
+	python3-cups
+#&& rm -rf /var/lib/apt/lists/*
 
 #RUN sed -i "s/^#\ \+\(en_US.UTF-8\)/\1/" /etc/locale.gen \
 #  && locale-gen en_US en_US.UTF-8
@@ -37,10 +27,12 @@ RUN rm -rf /var/lib/apt/lists/*
 #  --shell=/bin/bash \
 #  --password=$(mkpasswd print) \
 #  print \
-#  && sed -i '/%sudo[[:space:]]/ s/ALL[[:space:]]*$/NOPASSWD:ALL/' /etc/sudoers \
-#  && apt-get clean \
-#  && rm -rf /var/lib/apt/lists/* \
-#  && mkdir /var/lib/apt/lists/partial
+#  && sed -i '/%sudo[[:space:]]/ s/ALL[[:space:]]*$/NOPASSWD:ALL/' /etc/sudoers
+
+# Clean downloads and cache
+RUN apt-get clean \
+  && rm -rf /var/lib/apt/lists/* \
+  && mkdir /var/lib/apt/lists/partial
 
 #COPY etc/cups/cupsd.conf /etc/cups/cupsd.conf
 
