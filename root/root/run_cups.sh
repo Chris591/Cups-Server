@@ -18,7 +18,7 @@ cp /config/printers.conf /etc/cups/printers.conf
 
 #dbus-daemon --system &
 #sleep 1
-avahi-daemon --daemonize
+avahi-daemon --daemonize &
 
 /root/printer-update.sh &
 exec /usr/sbin/cupsd -f
