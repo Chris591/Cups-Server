@@ -40,7 +40,8 @@ jobs:
         with:
           platforms: linux/arm64/v8
           context: .
-          labels: ${{ steps.meta_id.outputs.labels }}
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
 #          files: |
 #            ./docker-bake.hcl
 #            ${{ steps.meta.outputs.bake-file }}
