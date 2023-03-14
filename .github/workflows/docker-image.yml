@@ -41,11 +41,11 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
       - name: Docker meta
         id: meta_id # you'll use this in the next step
-        uses: docker/metadata-action@v3
+        uses: docker/metadata-action@v4
         with:
-          # list of Docker images to use as base name for tags
-          images: |
-            <specify the image name>
+#          # list of Docker images to use as base name for tags
+#          images: |
+#            docker/metadata-action@v4
           # Docker tags based on the following events/attributes
           tags: |
             type=schedule
