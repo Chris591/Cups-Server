@@ -36,12 +36,21 @@ jobs:
             type=sha
       -
         name: Build
-        uses: docker/bake-action@v2
+        uses: docker/build-push-action@v4
         with:
-          platforms: linux/arm64/v8
-          context: .
+          push: false
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
+          platforms: linux/arm64/v8
+
+
+#        name: Build
+#        uses: docker/bake-action@v2
+#        with:
+#          platforms: linux/arm64/v8
+#          context: .
+#          tags: ${{ steps.meta.outputs.tags }}
+#          labels: ${{ steps.meta.outputs.labels }}
 #          files: |
 #            ./docker-bake.hcl
 #            ${{ steps.meta.outputs.bake-file }}
