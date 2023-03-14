@@ -1,8 +1,11 @@
-name: Build
+name: Docker
 
-# Controls when the workflow will run
+# This workflow uses actions that are not certified by GitHub.
+# They are provided by a third-party and are governed by
+# separate terms of service, privacy policy, and support
+# documentation.
+
 on:
-#  workflow_dispatch
   push:
     branches:
       - 'main'
@@ -69,8 +72,9 @@ jobs:
         with:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
 
-      -
-        name: Build
+      # Build and push Docker image with Buildx (don't push on PR)
+      # https://github.com/docker/build-push-action
+      - name: Build and push Docker image
         uses: docker/build-push-action@v4
         with:
           context: .
@@ -93,16 +97,4 @@ jobs:
           COSIGN_EXPERIMENTAL: "true"
         # This step uses the identity token to provision an ephemeral certificate
         # against the sigstore community Fulcio instance.
-        run: echo "chris591/cups-server:latest" | xargs -I {} cosign sign {}@${{ steps.build-and-push.outputs.digest }}
-
-#        name: Build
-#        uses: docker/bake-action@v2
-#        with:
-#          platforms: linux/arm64/v8
-#          context: .
-#          tags: ${{ steps.meta.outputs.tags }}
-#          labels: ${{ steps.meta.outputs.labels }}
-##          files: |
-##            ./docker-bake.hcl
-##            ${{ steps.meta.outputs.bake-file }}
-#          targets: build
+        run: echo "${{ steps.meta.outputs.tags }}" | xargs -I {} cosign sign {}@${{ steps.build-and-push.outputs.digest }}
