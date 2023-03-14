@@ -16,9 +16,9 @@ if [ ! -f /config/printers.conf ]; then
 fi
 cp /config/printers.conf /etc/cups/printers.conf
 
-dbus-daemon --system &
-sleep 1
-avahi-daemon --daemonize &
+#dbus-daemon --system &
+#sleep 1
+avahi-daemon --daemonize
 
 /root/printer-update.sh &
 exec /usr/sbin/cupsd -f
