@@ -13,6 +13,8 @@ echo $CUPSADMIN:$CUPSPASSWORD | chpasswd
 
 if [ ! -f /etc/cups/cupsd.conf ]; then
     cp -R /etc/cups_default/* /etc/cups/
+    mkdir -p /etc/cups/ppd
+    mkdir -p /etc/cups/interfaces
 #    rm -Rf /etc/cups
 #    ln -s /config /etc/cups 
 fi
