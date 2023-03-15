@@ -23,7 +23,7 @@ RUN apt-get update && apt-get install -y \
   hp-ppd \
   hplip \
   smbclient \
-  printer-driver-cups-pdf \
+  printer-driver-cups-pdf
 ####
 
 #	inotify-tools \
