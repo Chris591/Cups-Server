@@ -66,7 +66,7 @@ RUN chmod +x /root/*
 CMD ["/root/run_cups.sh"]
 
 # Copy the default configuration file
-COPY --chown=root:lp cups/cupsd.conf /etc/cups/cupsd.conf
+COPY --chown=root:lp etc/cups/cupsd.conf /etc/cups/cupsd.conf
 
 ## Baked-in config file changes
 #RUN sed -i 's/Listen localhost:631/Listen 0.0.0.0:631/' /etc/cups/cupsd.conf && \
