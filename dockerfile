@@ -53,7 +53,10 @@ RUN apt-get clean \
 
 #COPY etc/cups/cupsd.conf /etc/cups/cupsd.conf
 
-EXPOSE 631
+EXPOSE 631/tcp
+EXPOSE 445/tcp
+EXPOSE 139/tcp
+EXPOSE 5353/udp
 #ENTRYPOINT ["/usr/sbin/cupsd", "-f"]
 
 # We want a mount for these
