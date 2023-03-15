@@ -3,7 +3,7 @@ FROM debian:stable-slim
 RUN apt-get update && apt-get install -y \
 #  curl \
 #  sudo \
-#  locales \
+  locales \
 #  whois \
   cups \
 #  cups-filters \
@@ -30,12 +30,12 @@ RUN apt-get update && apt-get install -y \
 #	python3-cups
 #&& rm -rf /var/lib/apt/lists/*
 
-#RUN sed -i "s/^#\ \+\(en_US.UTF-8\)/\1/" /etc/locale.gen \
-#  && locale-gen en_US en_US.UTF-8
+RUN sed -i "s/^#\ \+\(en_US.UTF-8\)/\1/" /etc/locale.gen \
+  && locale-gen en_US en_US.UTF-8
 
-#ENV LANG=en_US.UTF-8 \
-#  LC_ALL=en_US.UTF-8 \
-#  LANGUAGE=en_US:en
+ENV LANG=en_US.UTF-8 \
+  LC_ALL=en_US.UTF-8 \
+  LANGUAGE=en_US:en
 
 #RUN useradd \
 #  --groups=sudo,lp,lpadmin \
